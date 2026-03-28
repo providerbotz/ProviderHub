@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Provider Hub - Admin Setup Guides</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        :root {
+            --red: #E50914;
+            --red-dark: #B20710;
+            --black: #000000;
+            --black-card: #141414;
+            --white: #FFFFFF;
+            --gray: #808080;
+            --gray-light: #B3B3B3;
+            --gray-dark: #333333;
+            --green: #00C853;
+            --blue: #3B82F6;
+            --orange: #FF9800;
+        }
+        
+        body {
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--black-card); }
+        ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+        
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 16px;
+            box-shadow: 0 10px 30px rgba(229,9,20,0.4);
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .title span { color: var(--red); }
+        
+        .subtitle {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--red);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .section {
+            background: var(--black-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .section-title .icon.red { background: linear-gradient(135deg, var(--red), var(--red-dark)); }
+        .section-title .icon.blue { background: linear-gradient(135deg, #2196F3, #1976D2); }
+        .section-title .icon.green { background: linear-gradient(135deg, #00C853, #00E676); }
+        .section-title .icon.orange { background: linear-gradient(135deg, #FF9800, #F57C00); }
+        .section-title .icon.purple { background: linear-gradient(135deg, #9C27B0, #7B1FA2); }
+        
+        .step-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--red);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .step:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .step-content { flex: 1; }
+        
+        .step-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .step-desc {
+            font-size: 13px;
+            color: var(--gray-light);
+            line-height: 1.7;
+        }
+        
+        .step-desc a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+        
+        .code-block {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #00E676;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .warning {
+            background: rgba(255,152,0,0.1);
+            border: 1px solid rgba(255,152,0,0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+        
+        .warning-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--orange);
+            margin-bottom: 8px;
+        }
+        
+        .warning-text {
+            font-size: 13px;
+            color: var(--gray-light);
+            line-height: 1.6;
+        }
+        
+        .success {
+            background: rgba(0,200,83,0.1);
+            border: 1px solid rgba(0,200,83,0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+        
+        .success-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+        
+        .success-text {
+            font-size: 13px;
+            color: var(--gray-light);
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            height: 50px;
+            padding: 0 24px;
+            border-radius: 14px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            color: white;
+            box-shadow: 0 4px 16px rgba(229,9,20,0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .btn-green {
+            background: linear-gradient(135deg, #00C853, #00E676);
+            color: white;
+            box-shadow: 0 4px 16px rgba(0,200,83,0.3);
+        }
+        
+        .btn-blue {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            box-shadow: 0 4px 16px rgba(33,150,243,0.3);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-full {
+            width: 100%;
+        }
+        
+        .copy-btn {
+            background: var(--blue);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .highlight {
+            background: rgba(229,9,20,0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--red);
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        
+        .toc {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .toc-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--gray-light);
+        }
+        
+        .toc-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .toc-item:last-child { border-bottom: none; }
+        .toc-item:hover { color: var(--red); }
+        
+        .toc-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: var(--gray-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Auto Generator Styles */
+        .generator-box {
+            background: linear-gradient(135deg, rgba(229,9,20,0.1), rgba(156,39,176,0.1));
+            border: 2px solid var(--red);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .generator-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .generator-title i { color: var(--red); }
+        
+        .generator-subtitle {
+            font-size: 13px;
+            color: var(--gray-light);
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            margin-bottom: 16px;
+        }
+        
+        .input-label {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 500;
+        }
+        
+        .input-field {
+            width: 100%;
+            height: 50px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 0 16px;
+            color: var(--white);
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--red);
+            background: rgba(229,9,20,0.05);
+        }
+        .input-field::placeholder { color: var(--gray); }
+        
+        .output-box {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .output-box.show { display: block; }
+        
+        .output-label {
+            font-size: 12px;
+            color: var(--green);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .output-code {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            line-height: 1.5;
+            color: #00E676;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+        .status-badge.success { background: rgba(0,200,83,0.2); color: var(--green); }
+        .status-badge.error { background: rgba(229,9,20,0.2); color: var(--red); }
+        .status-badge.pending { background: rgba(255,152,0,0.2); color: var(--orange); }
+        
+        .divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 20px 0;
+        }
+        
+        .feature-list {
+            margin-top: 12px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .feature-item:last-child { border-bottom: none; }
+        .feature-item i { color: var(--green); margin-top: 3px; }
+        .feature-item span { font-size: 13px; color: var(--gray-light); }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            padding: 16px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            z-index: 100;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { background: linear-gradient(135deg, #00C853, #00E676); color: black; }
+        .toast.error { background: linear-gradient(135deg, var(--red), var(--red-dark)); color: white; }
+        
+        /* Loading */
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .firebase-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            margin-bottom: 16px;
+        }
+        .firebase-status .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gray);
+        }
+        .firebase-status .dot.connected { background: var(--green); }
+        .firebase-status .dot.disconnected { background: var(--red); }
+        .firebase-status span { font-size: 13px; color: var(--gray-light); }
+    </style>
+</head>
+<body>
+    <a href="admin.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Admin Panel
+    </a>
+    
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-play"></i>
+        </div>
+        <h1 class="title">Provider <span>Hub</span></h1>
+        <p class="subtitle">Admin Panel Setup Guide</p>
+    </div>
+    
+    <!-- Auto Generator -->
+    <div class="generator-box" id="generatorBox">
+        <h2 class="generator-title">
+            <i class="fas fa-magic"></i> Automatic Setup Generator
+        </h2>
+        <p class="generator-subtitle">
+            Paste your Firebase User UID and Email to automatically generate database nodes and security rules
+        </p>
+        
+        <div class="firebase-status">
+            <div class="dot" id="firebaseStatusDot"></div>
+            <span id="firebaseStatusText">Checking Firebase connection...</span>
+        </div>
+        
+        <div class="input-group">
+            <label class="input-label">Admin Email</label>
+            <input type="email" class="input-field" id="adminEmail" placeholder="your-admin@email.com">
+        </div>
+        
+        <div class="input-group">
+            <label class="input-label">Firebase User UID (from Authentication)</label>
+            <input type="text" class="input-field" id="adminUid" placeholder="Paste your User UID here...">
+        </div>
+        
+        <button class="btn btn-primary btn-full" onclick="generateAll()">
+            <i class="fas fa-cogs"></i> Generate & Setup Automatically
+        </button>
+        
+        <div id="generatorStatus"></div>
+        
+        <!-- Generated Database JSON -->
+        <div class="output-box" id="databaseOutput">
+            <div class="output-label">
+                <i class="fas fa-database"></i> Generated Database Node (adminUsers)
+            </div>
+            <div class="output-code" id="databaseCode"></div>
+            <div class="action-buttons">
+                <button class="copy-btn" onclick="copyDatabase()">
+                    <i class="fas fa-copy"></i> Copy JSON
+                </button>
+                <button class="btn btn-green" onclick="pushToFirebase()" id="pushBtn">
+                    <i class="fas fa-cloud-upload-alt"></i> Push to Firebase
+                </button>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-blue btn-full" onclick="downloadDatabaseJSON()">
+                    <i class="fas fa-download"></i> Download JSON (Direct Import)
+                </button>
+            </div>
+            <div class="success" style="margin-top: 12px;">
+                <div class="success-title">
+                    <i class="fas fa-info-circle"></i> How to Import JSON File
+                </div>
+                <p class="success-text">
+                    1. Download the JSON file above<br>
+                    2. Go to Firebase Console → Realtime Database<br>
+                    3. Click the <strong>⋮</strong> (three dots) menu next to your database URL<br>
+                    4. Select <strong>"Import JSON"</strong><br>
+                    5. Choose the downloaded file and click <strong>Import</strong>
+                </p>
+            </div>
+        </div>
+        
+        <!-- Generated Rules -->
+        <div class="output-box" id="rulesOutput">
+            <div class="output-label">
+                <i class="fas fa-shield-alt"></i> Generated Security Rules
+            </div>
+            <div class="output-code" id="rulesCode"></div>
+            <div class="action-buttons" style="margin-top: 10px;">
+                <button class="copy-btn" onclick="copyRules()">
+                    <i class="fas fa-copy"></i> Copy Rules
+                </button>
+                <button class="btn btn-blue" onclick="downloadRulesJSON()" style="height: 36px; font-size: 12px;">
+                    <i class="fas fa-download"></i> Download Rules
+                </button>
+            </div>
+            <div class="warning" style="margin-top: 12px;">
+                <div class="warning-title">
+                    <i class="fas fa-info-circle"></i> How to Apply Rules
+                </div>
+                <p class="warning-text">
+                    1. Go to Firebase Console → Realtime Database → Rules<br>
+                    2. Delete existing rules and paste these<br>
+                    3. Click <strong>Publish</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toc">
+        <div class="toc-title">📋 Manual Setup Steps (Optional)</div>
+        <a href="#step1" class="toc-item">
+            <span class="toc-number">1</span>
+            Enable Firebase Authentication
+        </a>
+        <a href="#step2" class="toc-item">
+            <span class="toc-number">2</span>
+            Create Admin Account
+        </a>
+        <a href="#step3" class="toc-item">
+            <span class="toc-number">3</span>
+            Register Admin in Database
+        </a>
+        <a href="#step4" class="toc-item">
+            <span class="toc-number">4</span>
+            Set Database Security Rules
+        </a>
+        <a href="#step5" class="toc-item">
+            <span class="toc-number">5</span>
+            Test Your Login
+        </a>
+    </div>
+    
+    <!-- Step 1 -->
+    <div class="section" id="step1">
+        <h2 class="section-title">
+            <span class="icon red"><i class="fas fa-key"></i></span>
+            Step 1: Enable Firebase Authentication
+        </h2>
+        
+        <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+                <h3 class="step-title">Go to Firebase Console</h3>
+                <p class="step-desc">
+                    Open your browser and go to <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a>. 
+                    Select your project <span class="highlight">nhbo-90d76</span>.
+                </p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+                <h3 class="step-title">Navigate to Authentication</h3>
+                <p class="step-desc">
+                    In the left sidebar, click on <strong>Build</strong> → <strong>Authentication</strong>.
+                    If this is your first time, click <strong>Get Started</strong>.
+                </p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+                <h3 class="step-title">Enable Email/Password Provider</h3>
+                <p class="step-desc">
+                    Click on the <strong>Sign-in method</strong> tab. Click on <strong>Email/Password</strong> provider.
+                    Toggle the <strong>Enable</strong> switch to ON. Click <strong>Save</strong>.
+                </p>
+            </div>
+        </div>
+        
+        <div class="success">
+            <div class="success-title">
+                <i class="fas fa-check-circle"></i> Success
+            </div>
+            <p class="success-text">
+                Email/Password authentication is now enabled for your Firebase project!
+            </p>
+        </div>
+    </div>
+    
+    <!-- Step 2 -->
+    <div class="section" id="step2">
+        <h2 class="section-title">
+            <span class="icon blue"><i class="fas fa-user-plus"></i></span>
+            Step 2: Create Admin Account
+        </h2>
+        
+        <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+                <h3 class="step-title">Go to Users Tab</h3>
+                <p class="step-desc">
+                    In Authentication section, click on the <strong>Users</strong> tab.
+                </p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+                <h3 class="step-title">Add New User</h3>
+                <p class="step-desc">
+                    Click the <strong>Add user</strong> button. Enter your admin email and a strong password.
+                    Click <strong>Add user</strong>.
+                </p>
+                
+                <div class="warning">
+                    <div class="warning-title">
+                        <i class="fas fa-exclamation-triangle"></i> Important
+                    </div>
+                    <p class="warning-text">
+                        Use a strong password with at least 8 characters including uppercase, lowercase, numbers, and special characters.
+                        Save this password securely - you'll need it to login!
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+                <h3 class="step-title">Copy User UID</h3>
+                <p class="step-desc">
+                    After creating the user, you'll see a table with user details.
+                    <strong>Copy the User UID</strong> (a long string like <span class="highlight">abc123xyz456...</span>).
+                    Paste it in the generator above!
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Step 3 -->
+    <div class="section" id="step3">
+        <h2 class="section-title">
+            <span class="icon green"><i class="fas fa-database"></i></span>
+            Step 3: Register Admin in Database
+        </h2>
+        
+        <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+                <h3 class="step-title">Use the Automatic Generator</h3>
+                <p class="step-desc">
+                    The easiest way is to use the <strong>Automatic Setup Generator</strong> at the top of this page.
+                    Just paste your UID and email, then click <strong>Push to Firebase</strong>.
+                </p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+                <h3 class="step-title">Or Add Manually</h3>
+                <p class="step-desc">
+                    Go to Firebase Console → Realtime Database → Click on database URL → Add data:
+                </p>
+                
+                <div class="code-block">adminUsers
+  └── [your-user-uid]
+        ├── email: "your-admin@email.com"
+        ├── role: "admin"
+        └── createdAt: [timestamp]</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Step 4 -->
+    <div class="section" id="step4">
+        <h2 class="section-title">
+            <span class="icon orange"><i class="fas fa-shield-alt"></i></span>
+            Step 4: Set Database Security Rules
+        </h2>
+        
+        <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+                <h3 class="step-title">Go to Rules Tab</h3>
+                <p class="step-desc">
+                    In Realtime Database, click on the <strong>Rules</strong> tab.
+                </p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+                <h3 class="step-title">Copy Rules from Generator</h3>
+                <p class="step-desc">
+                    Use the <strong>Automatic Generator</strong> above to get the security rules,
+                    or copy the rules below:
+                </p>
+                
+                <div class="code-block" id="manualRulesCode">{
+  "rules": {
+    "adminUsers": {
+      ".read": "auth != null && root.child('adminUsers').child(auth.uid).exists()",
+      ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+    },
+    "movies": {
+      ".read": true,
+      ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+    },
+    "categories": {
+      ".read": true,
+      ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+    },
+    "users": {
+      ".read": true,
+      ".write": true
+    },
+    "subscriptions": {
+      ".read": true,
+      ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+    },
+    "paymentRequests": {
+      ".read": true,
+      ".write": true
+    },
+    "settings": {
+      ".read": true,
+      ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+    },
+    "comments": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}</div>
+                <button class="copy-btn" onclick="copyManualRules()">
+                    <i class="fas fa-copy"></i> Copy Rules
+                </button>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+                <h3 class="step-title">Publish Rules</h3>
+                <p class="step-desc">
+                    Click the <strong>Publish</strong> button to save your rules.
+                </p>
+            </div>
+        </div>
+        
+        <div class="success">
+            <div class="success-title">
+                <i class="fas fa-check-circle"></i> Security Rules Explained
+            </div>
+            <p class="success-text">
+                <strong>• adminUsers:</strong> Only existing admins can read/write.<br>
+                <strong>• movies, categories, settings:</strong> Admins can write, everyone can read.<br>
+                <strong>• users:</strong> Public read/write for user signup & profile updates.<br>
+                <strong>• subscriptions:</strong> Admins can manage, everyone can view plans.<br>
+                <strong>• paymentRequests:</strong> Public read/write for payment submissions.<br>
+                <strong>• comments:</strong> Public read/write for all users.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Step 5 -->
+    <div class="section" id="step5">
+        <h2 class="section-title">
+            <span class="icon green"><i class="fas fa-check-circle"></i></span>
+            Step 5: Test Your Login
+        </h2>
+        
+        <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+                <h3 class="step-title">Go to Admin Panel</h3>
+                <p class="step-desc">
+                    Open <a href="admin.html">admin.html</a> in your browser.
+                </p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+                <h3 class="step-title">Enter Credentials</h3>
+                <p class="step-desc">
+                    Enter the email and password you created in Step 2.
+                    Click <strong>Login</strong>.
+                </p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+                <h3 class="step-title">Verify Access</h3>
+                <p class="step-desc">
+                    If everything is set up correctly, you should see the Admin Dashboard.
+                    Your email will be displayed in the sidebar.
+                </p>
+            </div>
+        </div>
+        
+        <div class="success">
+            <div class="success-title">
+                <i class="fas fa-check-circle"></i> Congratulations!
+            </div>
+            <p class="success-text">
+                Your admin panel is now secured with Firebase Authentication!
+                Only users registered in the <strong>adminUsers</strong> database node can access the admin panel.
+            </p>
+        </div>
+        
+        <div class="btn-group">
+            <a href="admin.html" class="btn btn-primary">
+                <i class="fas fa-arrow-right"></i> Go to Admin Panel
+            </a>
+            <a href="user.html" class="btn btn-secondary">
+                <i class="fas fa-user"></i> View User Panel
+            </a>
+        </div>
+    </div>
+    
+    <!-- Troubleshooting -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="icon red"><i class="fas fa-tools"></i></span>
+            Troubleshooting
+        </h2>
+        
+        <div class="step">
+            <span class="step-number">?</span>
+            <div class="step-content">
+                <h3 class="step-title">"Access denied" Error</h3>
+                <p class="step-desc">
+                    Your user is not in the <strong>adminUsers</strong> node.
+                    Use the generator above to add your UID to the database.
+                </p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">?</span>
+            <div class="step-content">
+                <h3 class="step-title">"User not found" Error</h3>
+                <p class="step-desc">
+                    The email doesn't exist in Firebase Authentication.
+                    Create the user first in Firebase Console → Authentication → Users.
+                </p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">?</span>
+            <div class="step-content">
+                <h3 class="step-title">"Permission denied" when saving data</h3>
+                <p class="step-desc">
+                    Your database rules may not be set correctly.
+                    Make sure you published the security rules from Step 4.
+                </p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">?</span>
+            <div class="step-content">
+                <h3 class="step-title">Generator "Push to Firebase" not working</h3>
+                <p class="step-desc">
+                    The database rules might be blocking writes. Temporarily use open rules for setup:
+                </p>
+                <div class="code-block">{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}</div>
+                <div class="warning">
+                    <div class="warning-title">
+                        <i class="fas fa-exclamation-triangle"></i> Important
+                    </div>
+                    <p class="warning-text">
+                        After setup, immediately replace with secure rules!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Adding More Admins -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="icon blue"><i class="fas fa-user-plus"></i></span>
+            Adding More Admins
+        </h2>
+        
+        <p class="step-desc" style="margin-bottom: 16px;">
+            To add more admin users:
+        </p>
+        
+        <div class="feature-list">
+            <div class="feature-item">
+                <i class="fas fa-check"></i>
+                <span>Create new user in Firebase Console → Authentication → Users</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-check"></i>
+                <span>Copy the new user's UID</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-check"></i>
+                <span>Use the generator above with the new UID and email</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-check"></i>
+                <span>Click "Push to Firebase" to add the new admin</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBvYFYB-kSAFBmrOsjBG-yPbsitXzi7jEQ",
+            authDomain: "nhbo-90d76.firebaseapp.com",
+            databaseURL: "https://nhbo-90d76-default-rtdb.firebaseio.com",
+            projectId: "nhbo-90d76",
+            storageBucket: "nhbo-90d76.firebasestorage.app",
+            messagingSenderId: "829072545450",
+            appId: "1:829072545450:web:20ebfb3699b1245087a2d3",
+            measurementId: "G-ZFN486S1VR"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        
+        let generatedDatabaseJSON = null;
+        let generatedRules = null;
+        
+        // Check Firebase Connection
+        db.ref('.info/connected').on('value', (snap) => {
+            const dot = document.getElementById('firebaseStatusDot');
+            const text = document.getElementById('firebaseStatusText');
+            
+            if (snap.val() === true) {
+                dot.className = 'dot connected';
+                text.textContent = 'Firebase Connected';
+            } else {
+                dot.className = 'dot disconnected';
+                text.textContent = 'Firebase Disconnected';
+            }
+        });
+        
+        // Generate All
+        function generateAll() {
+            const email = document.getElementById('adminEmail').value.trim();
+            const uid = document.getElementById('adminUid').value.trim();
+            
+            if (!email) {
+                showToast('Please enter admin email', 'error');
+                return;
+            }
+            
+            if (!uid) {
+                showToast('Please enter User UID', 'error');
+                return;
+            }
+            
+            if (uid.length < 20) {
+                showToast('UID seems too short. Please check and paste the full UID.', 'error');
+                return;
+            }
+            
+            // Generate Database JSON with adminUsers wrapper
+            generatedDatabaseJSON = {
+                adminUsers: {
+                    [uid]: {
+                        email: email,
+                        role: "admin",
+                        createdAt: Date.now()
+                    }
+                }
+            };
+            
+            // Generate Rules
+            generatedRules = {
+                "rules": {
+                    "adminUsers": {
+                        ".read": "auth != null && root.child('adminUsers').child(auth.uid).exists()",
+                        ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+                    },
+                    "movies": {
+                        ".read": true,
+                        ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+                    },
+                    "categories": {
+                        ".read": true,
+                        ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+                    },
+                    "users": {
+                        ".read": true,
+                        ".write": true
+                    },
+                    "subscriptions": {
+                        ".read": true,
+                        ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+                    },
+                    "paymentRequests": {
+                        ".read": true,
+                        ".write": true
+                    },
+                    "settings": {
+                        ".read": true,
+                        ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+                    },
+                    "comments": {
+                        ".read": true,
+                        ".write": true
+                    }
+                }
+            };
+            
+            // Show Database Output
+            document.getElementById('databaseCode').textContent = JSON.stringify(generatedDatabaseJSON, null, 2);
+            document.getElementById('databaseOutput').classList.add('show');
+            
+            // Show Rules Output
+            document.getElementById('rulesCode').textContent = JSON.stringify(generatedRules, null, 2);
+            document.getElementById('rulesOutput').classList.add('show');
+            
+            // Show Status
+            document.getElementById('generatorStatus').innerHTML = `
+                <div class="status-badge success">
+                    <i class="fas fa-check-circle"></i> Generated successfully!
+                </div>
+            `;
+            
+            showToast('Generated successfully! Now push to Firebase.', 'success');
+        }
+        
+        // Push to Firebase
+        async function pushToFirebase() {
+            if (!generatedDatabaseJSON) {
+                showToast('Please generate first', 'error');
+                return;
+            }
+            
+            const btn = document.getElementById('pushBtn');
+            btn.innerHTML = '<span class="loading-spinner"></span> Pushing...';
+            btn.disabled = true;
+            
+            try {
+                // Get the UID from the generated JSON (inside adminUsers)
+                const uid = Object.keys(generatedDatabaseJSON.adminUsers)[0];
+                const data = generatedDatabaseJSON.adminUsers[uid];
+                
+                // Push to Firebase under adminUsers path
+                await db.ref('adminUsers').child(uid).set(data);
+                
+                btn.innerHTML = '<i class="fas fa-check"></i> Pushed Successfully!';
+                btn.style.background = 'linear-gradient(135deg, #00C853, #00E676)';
+                
+                document.getElementById('generatorStatus').innerHTML = `
+                    <div class="status-badge success">
+                        <i class="fas fa-check-circle"></i> Admin added to Firebase successfully!
+                    </div>
+                    <p style="font-size: 13px; color: var(--gray-light); margin-top: 10px;">
+                        Now copy and apply the security rules in Firebase Console → Realtime Database → Rules
+                    </p>
+                `;
+                
+                showToast('Admin added to Firebase!', 'success');
+                
+            } catch (error) {
+                btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed';
+                btn.style.background = 'linear-gradient(135deg, var(--red), var(--red-dark))';
+                
+                document.getElementById('generatorStatus').innerHTML = `
+                    <div class="status-badge error">
+                        <i class="fas fa-times-circle"></i> Failed: ${error.message}
+                    </div>
+                    <p style="font-size: 13px; color: var(--gray-light); margin-top: 10px;">
+                        Try setting temporary open rules (see Troubleshooting section)
+                    </p>
+                `;
+                
+                showToast('Failed to push. Check rules.', 'error');
+            }
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Push to Firebase';
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 3000);
+        }
+        
+        // Fallback Copy Function (works without HTTPS)
+        function copyToClipboard(text) {
+            // Try modern clipboard API first
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast('Copied to clipboard!', 'success');
+                }).catch(() => {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+        
+        // Fallback using textarea
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-9999px';
+            textArea.style.top = '-9999px';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast('Copied to clipboard!', 'success');
+                } else {
+                    showToast('Copy failed. Please select and copy manually.', 'error');
+                }
+            } catch (err) {
+                showToast('Copy failed. Please select and copy manually.', 'error');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+        
+        // Copy Functions
+        function copyDatabase() {
+            if (generatedDatabaseJSON) {
+                // Copy full structure with adminUsers wrapper
+                copyToClipboard(JSON.stringify(generatedDatabaseJSON, null, 2));
+            } else {
+                showToast('Please generate first', 'error');
+            }
+        }
+        
+        function copyRules() {
+            if (generatedRules) {
+                copyToClipboard(JSON.stringify(generatedRules, null, 2));
+            } else {
+                showToast('Please generate first', 'error');
+            }
+        }
+        
+        function copyManualRules() {
+            const rules = document.getElementById('manualRulesCode').textContent;
+            copyToClipboard(rules);
+        }
+        
+        // Download Database JSON for Direct Import
+        function downloadDatabaseJSON() {
+            if (!generatedDatabaseJSON) {
+                showToast('Please generate first', 'error');
+                return;
+            }
+            
+            // generatedDatabaseJSON already has adminUsers wrapper
+            const jsonString = JSON.stringify(generatedDatabaseJSON, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'adminUsers_import.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('JSON file downloaded! Import to Firebase.', 'success');
+        }
+        
+        // Download Rules JSON
+        function downloadRulesJSON() {
+            if (!generatedRules) {
+                showToast('Please generate first', 'error');
+                return;
+            }
+            
+            const jsonString = JSON.stringify(generatedRules, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'firebase_rules.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('Rules file downloaded!', 'success');
+        }
+        
+        // Toast
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>
