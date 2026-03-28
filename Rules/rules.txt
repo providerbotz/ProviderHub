@@ -1,0 +1,36 @@
+{
+  "rules": {
+    "adminUsers": {
+      ".read": "auth != null && root.child('adminUsers').child(auth.uid).exists()",
+      ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+    },
+    "movies": {
+      ".read": true,
+      ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+    },
+    "categories": {
+      ".read": true,
+      ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+    },
+    "users": {
+      ".read": true,
+      ".write": true
+    },
+    "subscriptions": {
+      ".read": true,
+      ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+    },
+    "paymentRequests": {
+      ".read": true,
+      ".write": true
+    },
+    "settings": {
+      ".read": true,
+      ".write": "auth != null && root.child('adminUsers').child(auth.uid).exists()"
+    },
+    "comments": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}
